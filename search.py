@@ -42,13 +42,12 @@ if __name__ == '__main__':
     search_part = input()
 
     while search_part != r'\\':
-        fd = search_tasks(lessons, search_part)
-        if not fd:
-            print('Не удалось найти задачу')
-        else:
+        if fd := search_tasks(lessons, search_part):
             for lesson_name, task_title_full, is_solved in fd:
                 print(f'Урок: "{lesson_name}", Задача: "{task_title_full}" '
                       f'({"" if is_solved else "не"} решена)')
+        else:
+            print('Не удалось найти задачу')
         print('===========\n')
 
         print(r'Для остановки ввода введите \\')
